@@ -1,6 +1,6 @@
 ---
 name: end-session
-description: Runs the Guitar Chord App project's end-of-session routine — writes a progress log, build documentation, and a prompt/question review for the current session, and appends them to the project's running log files. Trigger this whenever the user wants to wrap up, close out, or end a work session on this project ("let's end here", "wrap up for today", "end of session", "log this session"), or when a session is naturally concluding and the user hasn't explicitly asked but the work reached a stopping point worth recording. This is defined in the project's CLAUDE.md as something to do automatically every session, so don't wait to be asked — but this skill also gives an explicit manual trigger.
+description: Runs the Guitar Chord App project's end-of-session routine — writes a progress log, build documentation, and a prompt/question review for the current session, appends them to the project's running log files, and updates the GitHub wiki if this session's work changed anything it documents. Trigger this whenever the user wants to wrap up, close out, or end a work session on this project ("let's end here", "wrap up for today", "end of session", "log this session"), or when a session is naturally concluding and the user hasn't explicitly asked but the work reached a stopping point worth recording. This is defined in the project's CLAUDE.md as something to do automatically every session, so don't wait to be asked — but this skill also gives an explicit manual trigger.
 ---
 
 # End-of-session routine (Guitar Chord App)
@@ -38,6 +38,22 @@ Append a dated entry analyzing the prompts and questions the user asked this ses
 Be honest and specific here, not just complimentary — generic praise isn't useful feedback. This
 section is about the user's growth as a builder, so ground every point in something they actually
 asked or did this session, not general advice.
+
+## 4. Update the GitHub wiki (if relevant)
+
+The wiki (`https://github.com/SunandanKadekar/ChordAttack/wiki`) is a separate small git repo,
+cloned locally to `Q:\ChordAttack.wiki`, containing portfolio-facing summary pages: `Home`,
+`Project Vision and Requirements`, and `AI Team Structure`.
+
+Check whether anything from this session should update those pages — e.g. requirements/scope
+changed, a new AI teammate role was defined or stood up, or a new page-worthy milestone happened.
+If so:
+- Edit the relevant page(s) in `Q:\ChordAttack.wiki` to reflect the change (keep pages as
+  summaries/narrative, not a duplicate of `requirements.md` or the Issues list)
+- Commit and push from that folder (it's a separate git remote from the main repo)
+
+If nothing this session affects the wiki's content, skip this step — don't force an update just
+to touch the file.
 
 ## Notes
 
