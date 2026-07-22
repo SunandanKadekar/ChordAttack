@@ -24,3 +24,26 @@
 - Build order between the progression generator and quiz mode — undecided.
 - Concrete accessibility/performance targets — intent locked, specific numbers not set.
 - Whether to give the PM agent direct GitHub access — deferred; founder may revisit later.
+
+## 2026-07-22
+
+**What got done:**
+- Gave the PM agent its own GitHub identity: created bot account `pm-agent-chordattack` (dedicated email, added as a Write — not Admin — collaborator), worked through a real platform limitation (fine-grained PATs don't yet support outside collaborators picking a specific repo on someone else's personal account), and fell back to a classic PAT scoped to `public_repo` only, 180-day expiration, stored in a gitignored local file.
+- Built `scripts/pm-agent-gh.sh`, restricting the PM agent to only `gh issue` subcommands, authenticated as the bot. Updated `.claude/agents/pm.md` accordingly. Verified end-to-end via GitHub's activity log and edit-history API — the bot shows as a distinct actor from the founder on real ticket actions.
+- Created `status:new`/`status:in-progress`/`status:done` labels. PM agent used its new access to move a ticket's status and to fix a missing link in a closed ticket (#15).
+- Established a standing rule — later broadened — that GitHub writes go through the PM agent's identity, not the assistant's.
+- Set up a weekly automated status report: a claude.ai scheduled cloud routine (Fridays ~11:30am PDT) that reads the PM agent's own Job 3 criteria, gathers live ticket/log state, and drafts a Gmail email. Required connecting a Gmail MCP connector and the Claude GitHub App.
+- Created a new wiki page, "Team and Processes" — an org chart plus a living table of standing team processes, meant as onboarding reference for future teammates, human or AI.
+- Gave the PM agent wiki-write access (`scripts/pm-agent-wiki.sh`), a new Job 6 (review/update the team page when a process changes), and a skill that triggers that review automatically. Live-tested it successfully — the PM agent documented its own new capability under its own identity, and correctly left an unaffected row untouched.
+- Caught and corrected a scoping gap: wiki-write access was initially usage-scoped to just the Team & Processes page; broadened the standing rule to cover all wiki writes, any page.
+- Updated the founder deck twice (PM agent's GitHub identity track, then an "institutional memory" track), added a cover "last updated" date, and linked the deck from the wiki homepage.
+
+**Where things stand against the overall plan:**
+- AI-team process/tooling has moved from "set up" to "operating with real accountability infrastructure" — attribution, scoped credentials, and self-maintaining documentation are now real, tested mechanisms, not just descriptions.
+- Still no product code written. Architecture/backend design (#1, #17) remains the next real milestone — #17 is now marked in progress.
+- The weekly status report hasn't had its first live run yet (first fire: Friday, July 24) — worth checking in on then.
+
+**Open decisions / blockers:**
+- Resend (full email auto-send, no draft/review step) — deferred; Gmail-draft-and-review is the interim approach.
+- Architecture/backend agent — still not started; now the clear next step for actual product progress.
+- The Gmail connector's visibility to the scheduling backend was inconsistent during setup (repeatedly showed "not connected" even after confirmed connected in the UI, then worked anyway at creation time) — worth knowing if similar connector-sync issues recur.
