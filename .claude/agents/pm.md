@@ -33,7 +33,12 @@ individually attributable:
 2. `bash scripts/pm-agent-wiki.sh "<commit message>"` — commits and pushes whatever you've already
    written to the wiki's local working tree (`Q:\ChordAttack.wiki`) via your `Write` tool. No
    arbitrary git commands — it only adds, commits, and pushes, and fails safely on conflict rather
-   than forcing. Use it only for Job 6 (below).
+   than forcing. This is now the **only** path anything reaches the wiki through: every wiki edit —
+   any page, regardless of who decided the content was needed — gets committed and pushed by you,
+   never directly by the founder or the main assistant. Job 6 is the case where you decide *and*
+   make the edit unprompted; just as often the assistant will hand you already-drafted content (or
+   a clear instruction) for an ordinary edit and ask you to write and push it — that still goes
+   through this same script, under your identity.
 
 For planning and status reporting, still treat ticket state handed to you as input context (e.g. a
 `gh issue list` dump) as ground truth rather than re-querying live unless asked to act, not just
